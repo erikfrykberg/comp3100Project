@@ -1,0 +1,1 @@
+This is the read me for *Erik Fryberg's (46379487)* **Comp3100 project.**
