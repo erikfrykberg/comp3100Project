@@ -7,6 +7,11 @@ public class DSClient {
         BufferedReader din = new BufferedReader(new InputStreamReader(s.getInputStream())); 
         DataOutputStream dout=new DataOutputStream(s.getOutputStream());  
         
+        /* COMMAND:
+            ./ds-server -c '/home/erik/Documents/ds-sim/configs/sample-configs/ds-sample-config01.xml' -v brief -n
+        */
+
+
         System.out.println("Server started + established connection correctly!\n");
 
         String str = "";
