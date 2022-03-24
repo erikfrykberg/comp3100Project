@@ -8,7 +8,12 @@ public class DSClient2 {
         DataOutputStream dout=new DataOutputStream(s.getOutputStream());  
         
         /* COMMAND:
-            ./ds-server -c '/home/erik/Documents/ds-sim/configs/sample-configs/ds-sample-config01.xml' -v brief -n
+            
+                ./ds-server -c '/home/erik/Documents/ds-sim/configs/sample-configs/ds-sample-config01.xml' -v brief -n
+            
+            or for more info:
+                
+                ./ds-server -c '/home/erik/Documents/ds-sim/configs/sample-configs/ds-sample-config01.xml' -v all -n
         */
 
 
@@ -46,8 +51,8 @@ public class DSClient2 {
         String cores = brkn[brkn.length - 3];
         String mem = brkn[brkn.length - 2];
         String disk = brkn[brkn.length - 1];
-        String id = brkn[1];
-        System.out.println("cores: " + cores + ", mem: " + mem + ", disk: " + disk);
+        String id = brkn[2];
+        System.out.println("id: " + id + ", cores: " + cores + ", mem: " + mem + ", disk: " + disk);
 
         //SEND JOB SCHEDULE
         dout.write(("GETS Capable " + cores + " " + mem + " " + disk+ "\n").getBytes());
@@ -65,9 +70,17 @@ public class DSClient2 {
         str = din.readLine();
         System.out.println("RCVD: \'" + str + "\'");
 
+        //SEND OK x2
+        dout.write(("OK\n").getBytes());
+        dout.flush();
+
+        //READ LINE
+        str = din.readLine();
+        System.out.println("RCVD: \'" + str + "\'");
+
         String[] brkn2 = str.split(" "); 
         String type = brkn2[0];
-        String serverId = brkn[1];
+        String serverId = brkn2[1];
 
         //SEND JOB SCHEDULE
         dout.write(("SCHD " + id + " " + type + " " + serverId + "\n").getBytes());
